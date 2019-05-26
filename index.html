@@ -24,7 +24,7 @@
         render() {
             var squareStyle = {
                 height: 150,
-                backgroundColor: "#FF6663"
+                backgroundColor: this.props.color //  pass a property value to a child component by having each intermediate parent component pass on the property 
             };
 
             return(
@@ -36,10 +36,16 @@
     }
         
     class Label extends React.Component {
-        render() {
-            return(
-            <br/>
-            );
+        render()  { 
+          var labelStyle = {
+            fontFamily: "sans-serif",
+            fontWeight: "bold",
+            padding: 13,
+            margin: 0
+        };
+          return(
+            <p style={labelStyle}>{this.props.color}</p>
+          );
         }
     }
         
@@ -56,7 +62,8 @@
 
             return(
                 <div style={cardStyle}>
-                    <Square/>               {/* We called our Square component from inside the Card component. This is an example of component composability where one component relies on the output of another component.*/}
+                    <Square color={this.props.color} />               {/* We called our Square component from inside the Card component. This is an example of component composability where one component relies on the output of another component.*/}
+                    <Label color={this.props.color} />
                 </div>
             );
         }
@@ -64,7 +71,7 @@
 
     ReactDOM.render(
       <div>
-        <Card/>
+        <Card color="#FF6663" />
         
       </div>,
       document.querySelector("#container")
